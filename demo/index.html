@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Boilerplate</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../dist/jquery.backgroundcover.js"></script>
+
+        <style type="text/css">
+
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #bg {
+                background-image: url('http://upload.wikimedia.org/wikipedia/commons/d/d3/A_surfer_at_the_wave_edit.jpg');
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100%;
+            }
+
+
+        </style>
+
+
+	</head>
+	<body>
+		<div id="bg" data-safearea="1000,400,1500,1000"></div>
+
+        <script>
+			$(function() {
+				$("#bg").backgroundcover();
+			});
+		</script>
+	</body>
+</html>
