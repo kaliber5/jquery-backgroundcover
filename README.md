@@ -85,4 +85,4 @@ The values may be either percentages (relative to the image's width and height),
     
 ## Authors
 
-[Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](https://github.com/kaliber5)
+[Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](http://www.kaliber5.de)
