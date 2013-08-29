@@ -62,7 +62,7 @@
                 this.image = found[1];
             }
 
-            if (typeof this.$element.css("background-size") === "undefined") {
+            if (1 || typeof this.$element.css("background-size") === "undefined") {
                 this.mode = "img";
                 this.$img = $("<img src=\"" + this.image + "\" />")
                     .css("position", "absolute");
@@ -72,7 +72,7 @@
                 this.$element
                     .css("background-image","none")
                     .css("overflow","hidden")
-                    .append(this.$img);
+                    .prepend(this.$img);
             }
             else {
                 this.mode = "css";

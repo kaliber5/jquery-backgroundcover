@@ -15,6 +15,7 @@
             }
 
             #bg {
+                background-color: #000;
                 background-image: url('http://upload.wikimedia.org/wikipedia/commons/d/d3/A_surfer_at_the_wave_edit.jpg');
                 background-position: center center;
                 background-size: cover;
@@ -23,13 +24,29 @@
                 height: 100%;
             }
 
+            #bg p {
+                position: absolute;
+                padding: 10px;
+                background-color: #fff;
+                background-color: rgba(255,255,255,0.8);
+                width: 30%;
+                max-width: 300px;
+                top: 30px;
+                left: 30px;
+                font-family: Georgia, serif;
+                color: #666;
+                font-size: 16px;
+            }
+
 
         </style>
 
 
 	</head>
 	<body>
-		<div id="bg" data-safearea="1000,400,1500,1000"></div>
+		<div id="bg" data-safearea="1000,400,1500,1000">
+            <p>The background image will be sized and positioned so that the surfer will never be cropped.</p>
+		</div>
 
         <script>
 			$(function() {
