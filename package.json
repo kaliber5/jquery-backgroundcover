@@ -5,9 +5,9 @@
 	"author": "Simon Ihmig",
 	"repository": {
 		"type" : "git",
-		"url" : "https://github.com/kaliber5/jquery.backgroundcover.git"
+		"url" : "https://github.com/kaliber5/jquery-backgroundcover.git"
 	},
-	"homepage": "https://github.com/kaliber5/jquery.backgroundcover/",
+	"homepage": "https://github.com/kaliber5/jquery-backgroundcover",
 	"version": "3.3.1",
 	"devDependencies": {
 		"grunt": "~0.4.1",

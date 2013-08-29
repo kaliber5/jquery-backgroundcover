@@ -1,7 +1,7 @@
 # jquery.backgroundcover
 
 This jQuery plugin is a smarter version of the CSS3 feature "background-size: cover", to cover the area of a HTML element with a background image. It adds two features:
-* Safe Area: it is possible to define a safe area of the image, that will never be cropped. Se below for further information.
+* Safe Area: it is possible to define a safe area of the image, that will never be cropped. See below for further information.
 * IE8 compatibility (or any other browser that does not support background-size): instead of using a CSS background image, an img element is added and positioned behind.
 
 ## Safe Area
@@ -85,4 +85,4 @@ The values may be either percentages (relative to the image's width and height),
     
 ## Authors
 
-[Simon Ihmig](https://github.com/simonihmig)
+[Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](https://github.com/kalber5)

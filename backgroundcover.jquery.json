@@ -30,9 +30,9 @@
 		}
 	],
 	"bugs": "https://github.com/kaliber5/jquery-backgroundcover/issues",
-	"homepage": "http://jqueryboilerplate.com",
+	"homepage": "https://github.com/kaliber5/jquery-backgroundcove",
 	"docs": "https://github.com/kaliber5/jquery-backgroundcover#readme",
-	"download": "hhttps://github.com/kaliber5/jquery-backgroundcover/archive/master.zip",
+	"download": "https://github.com/kaliber5/jquery-backgroundcover/archive/master.zip",
 	"dependencies": {
 		"jquery": ">=1.4"
 	}
