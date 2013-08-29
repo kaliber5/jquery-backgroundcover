@@ -1,6 +1,6 @@
 /*
- *  jQuery Boilerplate - v0.1.0
- *  A jump-start for jQuery plugins development.
+ *  jQuery backgroundcover - v1.0.0
+ *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
  *  http://jqueryboilerplate.com
  *
  *  Made by Simon Ihmig
@@ -56,9 +56,6 @@
                 img,
                 src;
 
-
-
-
             this.image = this.settings.image;
             if (!this.image) {
                 // use background image if image is not specified explicitly
@@ -73,7 +70,7 @@
                 this.image = found[1];
             }
 
-            if (typeof this.$element.css("background-size") === "undefined") {
+            if (1 || typeof this.$element.css("background-size") === "undefined") {
                 this.mode = "img";
                 this.$img = $("<img src=\"" + this.image + "\" />")
                     .css("position", "absolute");
@@ -83,7 +80,7 @@
                 this.$element
                     .css("background-image","none")
                     .css("overflow","hidden")
-                    .append(this.$img);
+                    .prepend(this.$img);
             }
             else {
                 this.mode = "css";
