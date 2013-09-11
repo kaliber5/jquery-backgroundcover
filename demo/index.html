@@ -3,7 +3,7 @@
 	<head>
 		<title>jQuery Boilerplate</title>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="../dist/jquery.backgroundcover.js"></script>
+		<script src="../src/jquery.backgroundcover.js"></script>
 
         <style type="text/css">
 
@@ -38,6 +38,12 @@
                 font-size: 16px;
             }
 
+            button {
+                position: absolute;
+                bottom: 30px;
+                left: 30px;
+            }
+
 
         </style>
 
@@ -46,11 +52,19 @@
 	<body>
 		<div id="bg" data-safearea="1000,400,1500,1000">
             <p>The background image will be sized and positioned so that the surfer will never be cropped.</p>
+
+            <button id="change">Change Seafarea</button>
+
 		</div>
 
         <script>
 			$(function() {
 				$("#bg").backgroundcover();
+
+                $("#change").click(function(){
+                    $("#bg").data("backgroundcover").setSafearea("1200,600,1400,800");
+                })
+
 			});
 		</script>
 	</body>

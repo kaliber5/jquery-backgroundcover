@@ -38,6 +38,12 @@ background-size: cover;
 background-repeat: no-repeat;
 ```
 
+Change the safearea later:
+
+```JavaScript
+$("#bg").data("backgroundcover").setSafearea("100,200,300,400");
+```
+
 ## Configuration
 
 The following configuration options are available. They may be provided either with the options object when initializing the plugin, or as HTML5 data-* attributes on the HTML element. The following examples are equivalent.
@@ -79,7 +85,7 @@ The URL to the image to use as the background. If none is provided, the plugin l
     safearea:"20%,10%,70%,80%"
 }
 ```
-    
+
 The coordinates of the safe area (see above), as a comma seperated list of left, top, right and bottom coordinates, or in other words x1,y1,x2,y2, where (x1,y1) is the upper left point of the bounding box, and (x2,y2) the lower right.
 The values may be either percentages (relative to the image's width and height), or absolute pixel values (just numbers without unit, e.g. "50,100,380,495")
     

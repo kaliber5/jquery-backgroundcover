@@ -1,7 +1,7 @@
 /*
  *  jQuery backgroundcover - v1.0.0
  *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
- *  http://jqueryboilerplate.com
+ *  https://github.com/kaliber5/jquery-backgroundcove
  *
  *  Made by Simon Ihmig
  *  Under MIT License
@@ -52,7 +52,6 @@
             var me = this,
                 cssImage,
                 found,
-                absSize,
                 img,
                 src;
 
@@ -70,7 +69,7 @@
                 this.image = found[1];
             }
 
-            if (1 || typeof this.$element.css("background-size") === "undefined") {
+            if (typeof this.$element.css("background-size") === "undefined") {
                 this.mode = "img";
                 this.$img = $("<img src=\"" + this.image + "\" />")
                     .css("position", "absolute");
@@ -87,23 +86,7 @@
                 this.$element.css("background-image", "url(" + this.image + ")");
             }
 
-            // get the size in pixels
-            absSize = function(size, base) {
-                // if it's a number already, return that
-                if (typeof size === "number") {
-                    return size;
-                }
-                // trim if avaiable
-                if (typeof size.trim === "function") {
-                    size = size.trim();
-                }
-                // if it's a percentage, multiply it with the base
-                if (size.charAt(size.length-1) === "%") {
-                    var percentage = parseFloat(size);
-                    return Math.round(percentage/100 * base);
-                }
-                return Math.round(parseFloat(size));
-            };
+
 
             // get image dimensions
             this.loaded = false;
@@ -113,15 +96,8 @@
                 me.imageWidth = img.width;
                 me.imageHeight = img.height;
                 me.loaded = true;
-                var safe = me.settings.safearea.split(",");
 
-                me.safearea = {
-                    x1: absSize(safe[0],me.imageWidth),
-                    y1: absSize(safe[1],me.imageHeight),
-                    x2: absSize(safe[2],me.imageWidth),
-                    y2: absSize(safe[3],me.imageHeight)
-                };
-                me.layout();
+                me.setSafearea(me.settings.safearea);
             }
 
             img.onload = function() {
@@ -142,6 +118,40 @@
             $(window).resize(function(){
                 me.layout();
             });
+        },
+        setSafearea: function(safearea) {
+            this.settings.safearea = safearea;
+
+            if (!this.loaded) {
+                return;
+            }
+
+            var safe = safearea.split(","),
+                // get the size in pixels
+                absSize = function(size, base) {
+                    // if it's a number already, return that
+                    if (typeof size === "number") {
+                        return size;
+                    }
+                    // trim if avaiable
+                    if (typeof size.trim === "function") {
+                        size = size.trim();
+                    }
+                    // if it's a percentage, multiply it with the base
+                    if (size.charAt(size.length-1) === "%") {
+                        var percentage = parseFloat(size);
+                        return Math.round(percentage/100 * base);
+                    }
+                    return Math.round(parseFloat(size));
+                };
+
+            this.safearea = {
+                x1: absSize(safe[0],this.imageWidth),
+                y1: absSize(safe[1],this.imageHeight),
+                x2: absSize(safe[2],this.imageWidth),
+                y2: absSize(safe[3],this.imageHeight)
+            };
+            this.layout();
         },
         layout:function () {
             if (!this.loaded) {
@@ -236,8 +246,8 @@
     // preventing against multiple instantiations
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+            if (!$.data(this, pluginName)) {
+                $.data(this, pluginName, new Plugin(this, options));
             }
         });
     };
