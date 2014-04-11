@@ -1,5 +1,7 @@
 /*
- *  jQuery Backgroundcover - v1.0.1
+ *  jQuery backgroundcover - v1.0.2
+ *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
+ *  https://github.com/kaliber5/jquery-backgroundcove
  *
  *  Made by Simon Ihmig
  *  Under MIT License
@@ -19,8 +21,8 @@
     var pluginName = "backgroundcover",
         defaults = {
             image:null,
-            safearea:"0%,0%,100%,100%"
-
+            safearea:"0%,0%,100%,100%",
+            resizeInterval:250
         };
 
     // The actual plugin constructor
@@ -104,10 +106,23 @@
                 _onload(img);
             }
 
-            // listen for window resize events to refresh the layout
-            $(window).resize(function(){
-                me.layout();
-            });
+            // periodically check for changes in elements width and height
+            setInterval(function(){
+                me._checkResize();
+            }, this.settings.resizeInterval);
+
+        },
+        /**
+         * Check if elements width/Height has changed, call layout() in that case
+         * @private
+         */
+        _checkResize: function() {
+            var width = this.$element.width(),
+                height = this.$element.height();
+
+            if (width !== this.elementLastWidth || height !== this.elementLastHeight) {
+                this.layout();
+            }
         },
         setSafearea: function(safearea) {
             this.settings.safearea = safearea;
@@ -117,7 +132,7 @@
             }
 
             var safe = safearea.split(","),
-                // get the size in pixels
+            // get the size in pixels
                 absSize = function(size, base) {
                     // if it's a number already, return that
                     if (typeof size === "number") {
@@ -215,6 +230,9 @@
 
             offsetX = Math.round(-offsetX);
             offsetY = Math.round(-offsetY);
+
+            this.elementLastWidth = nodeW;
+            this.elementLastHeight = nodeH;
 
             this._update(bgW, bgH, offsetX, offsetY);
         },

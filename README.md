@@ -59,7 +59,7 @@ $("#bg").backgroundcover({
 </script>
 ```
 
-Options taked form data-* attributes:
+Options taken form data-* attributes:
 
 ```HTML
 <div id="bg" data-safearea="10%,30%,50%,80%"></div>
@@ -87,8 +87,19 @@ The URL to the image to use as the background. If none is provided, the plugin l
 ```
 
 The coordinates of the safe area (see above), as a comma seperated list of left, top, right and bottom coordinates, or in other words x1,y1,x2,y2, where (x1,y1) is the upper left point of the bounding box, and (x2,y2) the lower right.
-The values may be either percentages (relative to the image's width and height), or absolute pixel values (just numbers without unit, e.g. "50,100,380,495")
-    
+The values may be either percentages (relative to the image's width and height), or absolute pixel values (just numbers without unit, e.g. "50,100,380,495").
+
+### resizeInterval
+
+```JavaScript
+{
+    resizeInterval:100
+}
+```
+
+Change the default interval setting of 250ms for how often to poll for changes of the elements width and height.
+
+
 ## Authors
 
 [Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](http://www.kaliber5.de)
