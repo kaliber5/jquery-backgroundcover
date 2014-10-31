@@ -38,11 +38,22 @@ background-size: cover;
 background-repeat: no-repeat;
 ```
 
-Change the safearea later:
+Call methods on existing plugin:
 
 ```JavaScript
 $("#bg").data("backgroundcover").setSafearea("100,200,300,400");
+$("#bg").data("backgroundcover").setImage(url);
 ```
+
+Invoking the plugin on an element with existing plugin will just update its options. So the following code is equivalent to the above:
+
+```JavaScript
+$("#bg").backgroundcover({
+    image: url,
+    safearea: "100,200,300,400"
+});
+```
+
 
 ## Configuration
 

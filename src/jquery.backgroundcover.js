@@ -1,4 +1,12 @@
 /*
+ *  jQuery backgroundcover - v1.0.0
+ *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
+ *  https://github.com/kaliber5/jquery-backgroundcove
+ *
+ *  Made by Simon Ihmig
+ *  Under MIT License
+ */
+/*
  *  jQuery backgroundcover - v1.0.2
  *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
  *  https://github.com/kaliber5/jquery-backgroundcove
@@ -28,26 +36,55 @@
     // The actual plugin constructor
     function Plugin(element, options) {
         this.$element = $(element);
-        // jQuery has an extend method which merges the contents of two or
-        // more objects, storing the result in the first object. The first object
-        // is generally empty as we don't want to alter the default options for
-        // future instances of the plugin
-        this.settings = $.extend({}, defaults, this.$element.data(), options);
-
         this._defaults = defaults;
         this._name = pluginName;
+        this.settings = $.extend({}, defaults, this.$element.data(), options);
+        this.setOptions(this.settings);
         this.init();
     }
 
     Plugin.prototype = {
         init:function () {
+            var me = this;
+            // periodically check for changes in elements width and height
+            setInterval(function(){
+                me._checkResize();
+            }, this.settings.resizeInterval);
+
+        },
+        setOptions: function(options) {
+            this.settings = $.extend({}, defaults, this.$element.data(), options);
+            if (typeof options.image !== "undefined") {
+                this.setImage(options.image);
+            }
+            else {
+                // safearea is automatically updated when setting a new image, so don't do it twice
+                if (options.safearea) {
+                    this.setSafearea(options.safearea);
+                }
+            }
+
+        },
+        /**
+         * Check if elements width/Height has changed, call layout() in that case
+         * @private
+         */
+        _checkResize: function() {
+            var width = this.$element.width(),
+                height = this.$element.height();
+
+            if (width !== this.elementLastWidth || height !== this.elementLastHeight) {
+                this.layout();
+            }
+        },
+        setImage: function(image) {
             var me = this,
                 cssImage,
                 found,
                 img,
                 src;
 
-            this.image = this.settings.image;
+            this.image = image;
             if (!this.image) {
                 // use background image if image is not specified explicitly
                 cssImage = this.$element.css("background-image");
@@ -105,26 +142,10 @@
             if (img.complete) {
                 _onload(img);
             }
-
-            // periodically check for changes in elements width and height
-            setInterval(function(){
-                me._checkResize();
-            }, this.settings.resizeInterval);
-
-        },
-        /**
-         * Check if elements width/Height has changed, call layout() in that case
-         * @private
-         */
-        _checkResize: function() {
-            var width = this.$element.width(),
-                height = this.$element.height();
-
-            if (width !== this.elementLastWidth || height !== this.elementLastHeight) {
-                this.layout();
-            }
         },
         setSafearea: function(safearea) {
+            // when safearea is null or undefined, we apply our defaults
+            safearea = safearea || defaults.safearea;
             this.settings.safearea = safearea;
 
             if (!this.loaded) {
@@ -255,7 +276,12 @@
     $.fn[ pluginName ] = function (options) {
         return this.each(function () {
             if (!$.data(this, pluginName)) {
+                // create new plugin
                 $.data(this, pluginName, new Plugin(this, options));
+            }
+            else {
+                // apply options to existing plugin
+                $.data(this, pluginName).setOptions(options);
             }
         });
     };
