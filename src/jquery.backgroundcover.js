@@ -1,19 +1,3 @@
-/*
- *  jQuery backgroundcover - v1.0.0
- *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
- *  https://github.com/kaliber5/jquery-backgroundcove
- *
- *  Made by Simon Ihmig
- *  Under MIT License
- */
-/*
- *  jQuery backgroundcover - v1.0.2
- *  jQuery plugin to make CSS3 'background-size: cover' even smarter.
- *  https://github.com/kaliber5/jquery-backgroundcove
- *
- *  Made by Simon Ihmig
- *  Under MIT License
- */
 (function ($, window, document, undefined) {
 
     // undefined is used here as the undefined global variable in ECMAScript 3 is

@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		// Import package manifest
-		pkg: grunt.file.readJSON("backgroundcover.jquery.json"),
+		pkg: grunt.file.readJSON("package.json"),
 
 		// Banner definitions
 		meta: {
@@ -12,8 +12,8 @@ module.exports = function(grunt) {
 				" *  <%= pkg.description %>\n" +
 				" *  <%= pkg.homepage %>\n" +
 				" *\n" +
-				" *  Made by <%= pkg.author.name %>\n" +
-				" *  Under <%= pkg.licenses[0].type %> License\n" +
+				" *  Made by <%= pkg.author %>\n" +
+				" *  Under <%= pkg.license %> License\n" +
 				" */\n"
 		},
 
@@ -45,7 +45,22 @@ module.exports = function(grunt) {
 			options: {
 				banner: "<%= meta.banner %>"
 			}
-		}
+		},
+
+        bump: {
+            options: {
+                files: ['package.json','bower.json'],
+                updateConfigs: ['pkg'],
+                commit: true,
+                commitMessage: 'Release v%VERSION%',
+                commitFiles: ['-a'],
+                createTag: true,
+                tagName: '%VERSION%',
+                tagMessage: 'Version %VERSION%',
+                push: true,
+                pushTo: 'origin'
+            }
+        }
 
 
 	});
@@ -53,9 +68,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
-	grunt.loadNpmTasks("grunt-contrib-coffee");
+    grunt.loadNpmTasks('grunt-bump');
 
-	grunt.registerTask("default", ["jshint", "concat", "uglify"]);
+	grunt.registerTask("build", ["jshint", "concat", "uglify"]);
+	grunt.registerTask("default", ["build"]);
 	grunt.registerTask("travis", ["jshint"]);
-
+    grunt.registerTask("release", "Release a new version, push it and publish it", function(target) {
+        target = target || "patch";
+        grunt.task.run("bump-only:"+target, "build", "bump-commit");
+    });
 };

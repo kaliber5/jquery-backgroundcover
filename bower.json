@@ -1,0 +1,27 @@
+{
+  "name": "jquery-backgroundcover",
+  "version": "1.1.1",
+  "homepage": "https://github.com/kaliber5/jquery-backgroundcover",
+  "authors": [
+    "Simon Ihmig <ihmig@kaliber5.de>"
+  ],
+  "description": "jQuery plugin to make CSS3 'background-size: cover' even smarter.",
+  "main": "dist/jquery.backgroundcover.min.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery-plugin",
+    "background",
+    "safearea"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": ">1.8.0"
+  }
+}
